@@ -30,15 +30,9 @@ void clear(list *l)
 // list.c
 void insert_last(int x, list *l)
 {
-    if (is_null(l) || is_full(l))
+    if (is_null(l))
         return;
-    if (is_empty(l))
-    {
-        l->first = 0;
-    }
-    l->last++;
-    l->items[l->last] = x;
-    l->count++;
+    insert_at(x, l->last, l);
 }
 
 int remove_at(int i, list *l)
