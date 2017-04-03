@@ -25,7 +25,11 @@ void clear(list *l) {
 }
 
 // list.c
+<<<<<<< HEAD
 void insert(int x, list *l) {
+=======
+void insert_last(int x, list *l) {
+>>>>>>> Implementação Unidade 3 - Atividade 1 - Complementando a lista linear
     if (is_null(l) || is_full(l)) return;
     if(is_empty(l)) {
         l->first = 0;
@@ -73,3 +77,45 @@ void destroy_list(list **l) {
     *l = NULL;
 }
 
+<<<<<<< HEAD
+=======
+
+//Remove o último elemento e o retorna
+int remove_last(list *l) {
+    if (is_null(l)) return -1;
+    return remove_at(l->last, l);
+}
+
+//Remove o primeiro elemento e o retorna
+int remove_first(list *l){
+    if (is_null(l)) return -1;
+    return remove_at(l->first, l);
+}
+
+
+//Insere o elemento x na posição i
+void insert_at(int x, int i, list *l) {
+    if (is_null(l) || 
+        is_full(l) || 
+        (i < 0 || i > l->last)) return;
+
+    for (int j = l->last; j >= i; j--)
+    {
+        l->items[j+1] = l->items[j];
+    }
+    l->last++;
+    l->items[l->last] = x;
+    l->count++;
+}
+
+//Insere um elemento na primeira posição
+void insert_first(int x, list *l) {
+    if (is_null(l)) return;
+    insert_at(x, l->first, l);
+}
+
+//Procura por um elemento e retorna sua posição
+int search(int x, list *l) {
+
+}
+>>>>>>> Implementação Unidade 3 - Atividade 1 - Complementando a lista linear
