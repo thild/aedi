@@ -131,4 +131,5 @@ int search(int x, list *l)
         if (x == l->items[i])
             return i;
     }
+    return -1;
 }
