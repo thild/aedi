@@ -103,24 +103,34 @@ void insert_at(int x, int i, list *l)
         is_full(l))
         return;
 
-    if(is_empty(l)) {
+    if (is_empty(l))
+    {
         l->items[0] = x;
         l->first = 0;
         l->last = 0;
         l->count = 1;
         return;
-    }    
+    }
 
-    if (i < 0 || i > l->last) {
+    if (i < 0 || i > l->last)
+    {
         return;
     }
 
-    for (int j = l->last; j >= i; j--)
+    if (i == l->last)
     {
-        l->items[j + 1] = l->items[j];
+        l->last++;
+        l->items[l->last] = x;
     }
-    l->last++;
-    l->items[i] = x;
+    else
+    {
+        for (int j = l->last; j >= i; j--)
+        {
+            l->items[j + 1] = l->items[j];
+        }
+        l->last++;
+        l->items[i] = x;
+    }
     l->count++;
 }
 
