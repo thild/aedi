@@ -4,6 +4,7 @@
 
 void main() {
     list *l = new_list(10);
+    insert_at(100, -1, l);
     insert_last(0, l);
     insert_last(10, l);
     insert_last(20, l);

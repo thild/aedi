@@ -32,7 +32,10 @@ void insert_last(int x, list *l)
 {
     if (is_null(l))
         return;
-    insert_at(x, l->last, l);
+    if (is_empty(l))
+        insert_at(x, 0, l);
+    else
+        insert_at(x, l->last, l);
 }
 
 int remove_at(int i, list *l)
@@ -99,12 +102,16 @@ int remove_first(list *l)
 //Insere o elemento x na posição i
 void insert_at(int x, int i, list *l)
 {
+    //se a lista for nula ou estiver cheia nao é possivel inserir
     if (is_null(l) ||
         is_full(l))
         return;
 
+    //condicao especial quando a lista é vazia
     if (is_empty(l))
     {
+        if (i != 0)
+            return;
         l->items[0] = x;
         l->first = 0;
         l->last = 0;
@@ -112,6 +119,8 @@ void insert_at(int x, int i, list *l)
         return;
     }
 
+    //se a lista nao estiver vazia,
+    //nao eh possivel inserir fora do intervalo da lista
     if (i < 0 || i > l->last)
     {
         return;
@@ -139,7 +148,10 @@ void insert_first(int x, list *l)
 {
     if (is_null(l))
         return;
-    insert_at(x, l->first, l);
+    if (is_empty(l))
+        insert_at(x, 0, l);
+    else
+        insert_at(x, l->first, l);
 }
 
 //Procura por um elemento e retorna sua posição
