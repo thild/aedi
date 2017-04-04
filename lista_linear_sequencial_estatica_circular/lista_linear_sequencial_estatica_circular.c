@@ -102,9 +102,9 @@ void insert_at(int x, int i, list *l)
     if (is_null(l) ||
         is_full(l))
         return;
+
     if (is_empty(l))
     {
-        printf("Empty: %d\n", i);
         l->first = 0;
         l->last = 0;
         l->count = 1;
@@ -115,20 +115,17 @@ void insert_at(int x, int i, list *l)
     if (i == l->first)
     {
         int j = position(INSERT_FIRST, l);
-        printf("First: %d\n", j);
         l->first = j;
         l->items[j] = x;
     }
     else if (i == l->last)
     {
         int j = position(INSERT_LAST, l);
-        printf("Last: %d\n", j);
         l->last = j;
         l->items[j] = x;
     }
     else
     {
-        printf("Middle: %d\n", i);
         if (l->last == l->max - 1)
         {
             l->items[0] = l->items[l->last];
@@ -157,6 +154,7 @@ int search(int x, list *l)
 {
     if (is_null(l) || is_empty(l))
         return -1;
+        
     if (l->first > l->last)
     {
         for (int i = l->first; i < l->max - 1; i++)

@@ -108,7 +108,12 @@ void insert_at(int x, int i, list *l)
         l->first = 0;
         l->last = 0;
         l->count = 1;
+        return;
     }    
+
+    if (i < 0 || i > l->last) {
+        return;
+    }
 
     for (int j = l->last; j >= i; j--)
     {
