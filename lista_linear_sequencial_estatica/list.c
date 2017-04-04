@@ -100,9 +100,15 @@ int remove_first(list *l)
 void insert_at(int x, int i, list *l)
 {
     if (is_null(l) ||
-        is_full(l) ||
-        (i < 0 || i > l->last))
+        is_full(l))
         return;
+
+    if(is_empty(l)) {
+        l->items[0] = x;
+        l->first = 0;
+        l->last = 0;
+        l->count = 1;
+    }    
 
     for (int j = l->last; j >= i; j--)
     {

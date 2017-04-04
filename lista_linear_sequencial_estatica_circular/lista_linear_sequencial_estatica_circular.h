@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-static enum OPERATION {INSERT_FIRST, INSERT_LAST, REMOVE_FIRST, REMOVE_LAST} operation;
+typedef enum {INSERT_FIRST, INSERT_LAST, REMOVE_FIRST, REMOVE_LAST} operation_t;
 
 typedef struct {
       int *items;
@@ -38,6 +38,6 @@ void insert_first(int x, list *l);
 int search(int x, list *l);
 
 //Retorna a próxima posição a ser 
-static int position(list *l);
+static int position(operation_t op, list *l);
 
 #endif

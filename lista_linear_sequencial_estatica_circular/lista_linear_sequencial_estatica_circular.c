@@ -100,16 +100,47 @@ int remove_first(list *l)
 void insert_at(int x, int i, list *l)
 {
     if (is_null(l) ||
-        is_full(l) ||
-        (i < 0 || i > l->last))
+        is_full(l))
         return;
-
-    for (int j = l->last; j >= i; j--)
+    if (is_empty(l))
     {
-        l->items[j + 1] = l->items[j];
+        printf("Empty: %d\n", i);
+        l->first = 0;
+        l->last = 0;
+        l->count = 1;
+        l->items[0] = x;
+        return;
     }
-    l->last++;
-    l->items[i] = x;
+
+    if (i == l->first)
+    {
+        int j = position(INSERT_FIRST, l);
+        printf("First: %d\n", j);
+        l->first = j;
+        l->items[j] = x;
+    }
+    else if (i == l->last)
+    {
+        int j = position(INSERT_LAST, l);
+        printf("Last: %d\n", j);
+        l->last = j;
+        l->items[j] = x;
+    }
+    else
+    {
+        printf("Middle: %d\n", i);
+        if (l->last == l->max - 1)
+        {
+            l->items[0] = l->items[l->last];
+        }
+        for (int j = l->last; j >= i; j--)
+        {
+            l->items[j + 1] = l->items[j];
+        }
+
+        l->last++;
+        l->items[i] = x;
+    }
     l->count++;
 }
 
@@ -126,10 +157,65 @@ int search(int x, list *l)
 {
     if (is_null(l) || is_empty(l))
         return -1;
-    for (int i = l->first; i < l->last; i++)
+    if (l->first > l->last)
     {
-        if (x == l->items[i])
-            return i;
+        for (int i = l->first; i < l->max - 1; i++)
+        {
+            if (x == l->items[i])
+                return i;
+        }
+        for (int i = 0; i < l->last; i++)
+        {
+            if (x == l->items[i])
+                return i;
+        }
+    }
+    else
+    {
+        for (int i = l->first; i < l->last; i++)
+        {
+            if (x == l->items[i])
+                return i;
+        }
     }
     return -1;
+}
+
+static int position(operation_t op, list *l)
+{
+    switch (op)
+    {
+    case INSERT_FIRST:
+        if (l->first == -1)
+            return 0;
+        if (l->first == 0)
+            return l->max - 1;
+        return l->first - 1;
+        break;
+    case INSERT_LAST:
+        if (l->last == -1)
+            return 0;
+        if (l->last == l->max - 1)
+            return 0;
+        return l->last + 1;
+        break;
+    case REMOVE_FIRST:
+        if (l->first == -1)
+            return -1;
+        if (l->first == l->max - 1)
+            return 0;
+        return l->first - 1;
+        break;
+    case REMOVE_LAST:
+        if (l->last == -1)
+            return -1;
+        if (l->last == 0)
+            return l->max - 1;
+        return l->last + 1;
+        break;
+    default:
+        printf("DEFAULT\n");
+        return -1;
+        break;
+    }
 }
