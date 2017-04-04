@@ -6,7 +6,6 @@ void main() {
     list *l = new_list(5);
     insert_at(10, 0, l);
     insert_at(20, 1, l);
-    insert_at(30, 0, l);
     insert_at(40, 2, l);
     insert_at(50, 3, l);
     print(l);

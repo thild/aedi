@@ -121,7 +121,8 @@ void insert_at(int x, int i, list *l)
 
     //se a lista nao estiver vazia,
     //nao eh possivel inserir fora do intervalo da lista
-    if (i < 0 || i > l->last)
+    //caso i == l->count o item sera inserido em l->count
+    if (i < 0 || (i != l->count && i > l->last))
     {
         return;
     }

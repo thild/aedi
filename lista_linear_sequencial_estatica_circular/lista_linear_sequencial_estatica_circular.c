@@ -70,9 +70,32 @@ int is_full(list *l)
 
 void print(list *l)
 {
-    for (int i = 0; i < l->count; i++)
+
+    for (int i = 0; i < l->max; i++)
     {
         printf("Item[%d] = %d\n", i, l->items[i]);
+    }
+    return;
+    printf("0");
+    if (l->first > l->last)
+    {
+        printf("1");
+        for (int i = l->first; i <= l->max - 1; i++)
+        {
+            printf("Item[%d] = %d\n", i, l->items[i]);
+        }
+        for (int i = 0; i <= l->last; i++)
+        {
+            printf("Item[%d] = %d\n", i, l->items[i]);
+        }
+    }
+    else
+    {
+        printf("2");
+        for (int i = l->first; i <= l->last; i++)
+        {
+            printf("Item[%d] = %d\n", i, l->items[i]);
+        }
     }
 }
 
@@ -111,18 +134,23 @@ void insert_at(int x, int i, list *l)
     if (is_empty(l))
     {
         if (i != 0)
+        {
+            printf("return 0\n");
             return;
+        }
         l->items[0] = x;
         l->first = 0;
         l->last = 0;
         l->count = 1;
+        printf("return 1\n");
         return;
     }
 
     //se a lista nao estiver vazia,
     //nao eh possivel inserir fora do intervalo da lista
-    if (i < 0 || i > l->last)
+    if (i < 0 || (i != l->count && i > l->last))
     {
+        printf("i=%d, l->first:%d, l->last:%d, l->count:%d, return 2\n", i, l->first, l->last, l->count);
         return;
     }
 
@@ -138,19 +166,22 @@ void insert_at(int x, int i, list *l)
         l->last = j;
         l->items[j] = x;
     }
-    else
+    else // inserindo no meio da lista
     {
+        int old_last = l->last;
         if (l->last == l->max - 1)
         {
             l->items[0] = l->items[l->max - 1];
             l->last = 0;
         }
-        for (int j = l->last; j >= i; j--)
+        else
+        {
+            l->last++;
+        }
+        for (int j = old_last; j >= i; j--)
         {
             l->items[j + 1] = l->items[j];
         }
-
-        l->last++;
         l->items[i] = x;
     }
     l->count++;
