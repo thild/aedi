@@ -80,10 +80,10 @@ int remove_at(int i, list *l)
         int j = i;
         while (j != l->last)
         {
-            if (j == l->max) //quando cruza o 0
+            if (j == l->max - 1) //quando cruza o 0
             {
-                l->items[0] = l->items[l->max - 1];
-                j = 1;
+                l->items[j] = l->items[0];
+                j = 0;
             }
             else
             {
