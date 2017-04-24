@@ -1,9 +1,24 @@
 #ifndef LIST_H
 #define LIST_H
 
-typedef enum {INSERT_FIRST, INSERT_LAST, REMOVE_FIRST, REMOVE_LAST} operation_t;
+#define debug_print(...)                                                 \
+      do                                                                 \
+      {                                                                  \
+            if (DEBUG)                                                   \
+            {                                                            \
+                  printf("%s (%s)\n", __PRETTY_FUNCTION__, __VA_ARGS__); \
+            }                                                            \
+      } while (0)
 
-typedef struct {
+//fprintf(stderr, __VA_ARGS__);
+
+typedef enum { INSERT_FIRST,
+               INSERT_LAST,
+               REMOVE_FIRST,
+               REMOVE_LAST } operation_t;
+
+typedef struct
+{
       int *items;
       int max;
       int first;
@@ -11,7 +26,7 @@ typedef struct {
       int count;
 } list;
 
-list* new_list(int size);
+list *new_list(int size);
 void clear(list *l);
 void insert_last(int x, list *l);
 int remove_at(int i, list *l);
@@ -37,7 +52,7 @@ void insert_first(int x, list *l);
 //Procura por um elemento e retorna sua posição
 int search(int x, list *l);
 
-//Retorna a próxima posição a ser 
+//Retorna a próxima posição a ser
 static int position(operation_t op, list *l);
 
 #endif
