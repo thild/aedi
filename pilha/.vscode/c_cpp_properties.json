@@ -8,26 +8,19 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "/usr/include",
-                    "/usr/local/include"
-                ]
+                "databaseFilename": ""
             }
         },
         {
             "name": "Linux",
             "includePath": [
                 "/usr/include",
-                "/usr/local/include"
+                "/usr/local/include",
+                "/mnt/docs/dev/aulas/aedi/lista_linear_sequencial_estatica_circular"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "/usr/include",
-                    "/usr/local/include"
-                ]
+                "databaseFilename": ""
             }
         },
         {
@@ -37,10 +30,7 @@
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": "",
-                "path": [
-                    "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*"
-                ]
+                "databaseFilename": ""
             }
         }
     ]
