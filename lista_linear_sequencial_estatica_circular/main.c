@@ -5,11 +5,25 @@
 int ultimo(list *l);
 void mprint(list *l);
 
-    int ultimo(list *l)
+int ultimo(list *l)
 {
+    int a = 0;
     int i = 0;
     int j = 0;
+    int k = 3;
+
     int n = l->count;
+
+    // for (int i = 0; i < n; ++i)
+    // {
+    //     printf("x: %d\n", l->items[a]);
+    //     printf("a: %d; k: %d; i: %d; j: %d\n", a, k, i, j);
+    //     if ((a + k - 1) > n)
+    //         j++;
+    //     a = (a + k - 1) % n + 1;
+    // }
+    // return a;
+
     //[14, 31, 42, 159, 117, 101, 130, 82, 113, 4]
     //[31, 42, 117, 101, 82, 113]
     //[42, 117, 82, 113]
@@ -24,9 +38,9 @@ void mprint(list *l);
     // (a + k - 1) % i + 1 indica a próxima pessoa de onde iniciar.
     // Na última iteração esta pessoa é obviamente a vencedora.
 
-    // 4, 130, 159, 14, 101, 31, 117, 82, 42, 113
     while (l->count > 1)
     {
+        a = (a + k - 1) % n + 1;
         j = i % l->count;
         j = (l->count - 1) - j;
         mprint(l);
@@ -34,6 +48,16 @@ void mprint(list *l);
         i += 2;
     }
     return l->first;
+
+    // while (l->count > 1)
+    // {
+    //     j = i % l->count;
+    //     j = (l->count - 1) - j;
+    //     mprint(l);
+    //     remove_at(j, l);
+    //     i += 2;
+    // }
+    // return l->first;
 }
 
 void main()
@@ -146,7 +170,6 @@ void mprint(list *l)
         printf("+-----");
     }
     printf("+\n");
-   
 
     //Fim representação em memória
 }

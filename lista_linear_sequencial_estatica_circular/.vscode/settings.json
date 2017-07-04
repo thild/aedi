@@ -1,4 +1,7 @@
 // Place your settings in this file to overwrite default and user settings.
 {
+    "files.associations": {
+        "lista_linear_sequencial_estatica_circular.h": "c"
+    }
     //"http.proxy": "http://SEU_USUARIO:SUA_SENHA@proxy.cedeteg.unicentro.br:8080/"
 }
