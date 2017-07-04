@@ -2,24 +2,34 @@
 #include <stdio.h>
 #include "lista_linear_sequencial_estatica_circular.h"
 
-int ultimo (list *l);
+int ultimo(list *l);
+void mprint(list *l);
 
-int ultimo(list *l) {
+    int ultimo(list *l)
+{
     int i = 0;
     int j = 0;
-    int k = 0;
+    int n = l->count;
     //[14, 31, 42, 159, 117, 101, 130, 82, 113, 4]
     //[31, 42, 117, 101, 82, 113]
     //[42, 117, 82, 113]
+    //[42, 82, 113]
+    //[42, 113]
+    //[113]
+
+    // Assim para o método iterativo a = (a + k - 1) % i + 1,
+    // a primeira pessoa
+    // 'i' representa o número de pessoas vivas,
+    // 'a + k - 1' indica quem vai ser morto,
+    // (a + k - 1) % i + 1 indica a próxima pessoa de onde iniciar.
+    // Na última iteração esta pessoa é obviamente a vencedora.
 
     // 4, 130, 159, 14, 101, 31, 117, 82, 42, 113
     while (l->count > 1)
     {
         j = i % l->count;
-        printf("############# j = %d ######## \n", j);
         j = (l->count - 1) - j;
-        printf("############# j real = %d ######## \n", j);
-        print(l);
+        mprint(l);
         remove_at(j, l);
         i += 2;
     }
@@ -40,9 +50,9 @@ void main()
     insert_last(82, l);
     insert_last(113, l);
     insert_last(4, l);
-    print(l);
-    printf("%d", ultimo(l));
-    print(l);
+    //print(l);
+    ultimo(l);
+    //print(l);
 
     // l->first = 1;
     // l->last = 3;
@@ -105,4 +115,38 @@ void main()
     // // insert_first(100, l);
     destroy_list(&l);
     printf("Lista destruida e sem dangling pointers? %s\n", l == NULL ? "Sure!" : "Wah Wah Wah Waaaaaaaah!");
+}
+
+void mprint(list *l)
+{
+
+    for (int i = -1; i < l->max; i++)
+    {
+        printf("+-----");
+    }
+    printf("+\n");
+    printf("|%-5s", "VIRT.");
+
+    for (int i = 0; i <= l->max - 1; i++)
+    {
+        int j = (l->first + i) % l->max;
+        if (i >= l->count)
+        {
+            printf("|%-5s", "LIXO");
+        }
+        else
+        {
+            printf("|%-5d", l->items[j]);
+        }
+    }
+
+    printf("|\n");
+    for (int i = -1; i < l->max; i++)
+    {
+        printf("+-----");
+    }
+    printf("+\n");
+   
+
+    //Fim representação em memória
 }

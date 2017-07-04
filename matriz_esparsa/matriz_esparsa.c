@@ -59,7 +59,7 @@ void print_sparse_matrix(sparse_matrix *a)
         printf("\n");
         if (dnode != NULL && dnode->i == i)
         {
-            dnode = dnode->down;
+            dnode = dnode->down; 
             rnode = dnode;
         }
     }
