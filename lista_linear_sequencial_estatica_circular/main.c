@@ -8,21 +8,9 @@ void mprint(list *l);
 int ultimo(list *l)
 {
     int a = 0;
-    int i = 0;
     int j = 0;
     int k = 3;
-
     int n = l->count;
-
-    // for (int i = 0; i < n; ++i)
-    // {
-    //     printf("x: %d\n", l->items[a]);
-    //     printf("a: %d; k: %d; i: %d; j: %d\n", a, k, i, j);
-    //     if ((a + k - 1) > n)
-    //         j++;
-    //     a = (a + k - 1) % n + 1;
-    // }
-    // return a;
 
     //[14, 31, 42, 159, 117, 101, 130, 82, 113, 4]
     //[31, 42, 117, 101, 82, 113]
@@ -31,33 +19,20 @@ int ultimo(list *l)
     //[42, 113]
     //[113]
 
-    // Assim para o método iterativo a = (a + k - 1) % i + 1,
-    // a primeira pessoa
-    // 'i' representa o número de pessoas vivas,
-    // 'a + k - 1' indica quem vai ser morto,
-    // (a + k - 1) % i + 1 indica a próxima pessoa de onde iniciar.
-    // Na última iteração esta pessoa é obviamente a vencedora.
-
-    while (l->count > 1)
+    for (int i = 0; i < n; ++i)
     {
-        a = (a + k - 1) % n + 1;
-        j = i % l->count;
-        j = (l->count - 1) - j;
-        mprint(l);
+        j = (l->count - 1) - (a % l->count);
         remove_at(j, l);
-        i += 2;
+        a = (a + k) % n - 1;
+        if (a > l->count)
+        {
+            a = a % l->count;
+        }
+        printf("%d %d\n", a, l->count);
+        mprint(l);
     }
-    return l->first;
+    return l->items[l->first];
 
-    // while (l->count > 1)
-    // {
-    //     j = i % l->count;
-    //     j = (l->count - 1) - j;
-    //     mprint(l);
-    //     remove_at(j, l);
-    //     i += 2;
-    // }
-    // return l->first;
 }
 
 void main()
